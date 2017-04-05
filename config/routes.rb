@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
+  namespace :api, defaults: { format: :json }, path: '/' do
+    resources :users, only: [:show, :index, :create, :update, :destroy]
+  end
   root 'posts#index'
 
   # Example of regular route:
