@@ -33,6 +33,7 @@ class Api::PostsController < ApplicationController
   end
 
   def destroy
+    raise ActiveRecord::RecordNotFound unless current_user.posts.include? @post
     post = current_user.posts.find(params[:id])
     post.destroy
     head 204
