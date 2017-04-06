@@ -1,6 +1,7 @@
 class Api::UsersController < ApplicationController
-  before_action :authenticate_with_token!, only: [:update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
+
+  before_action :authenticate_with_token!, only: [:update, :destroy]
   before_filter :set_user, only: [:show, :update, :destroy ]
 
   def index
@@ -43,5 +44,9 @@ class Api::UsersController < ApplicationController
 
     def approved_params
       params.require(:user).permit(:id, :first_name, :last_name, :email, :password, :password_confirmation)
+    end
+
+    def render_404
+      render json: { error: "Record Not Found", status: 404 }
     end
 end

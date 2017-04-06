@@ -13,6 +13,22 @@ describe User do
   it { should respond_to :password_confirmation }
   it { should respond_to :auth_token }
 
+  describe "#posts association" do
+
+    before do
+      @user.save
+      3.times { FactoryGirl.create :post, user: @user }
+    end
+
+    it "destroys the associated products on self destruct" do
+      posts = @user.posts
+      @user.destroy
+      posts.each do |product|
+        expect(Post.find(post)).to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
+
   it "is not valid without a first_name" do
     expect( FactoryGirl.build(:user, first_name: nil) ).to_not be_valid
   end
