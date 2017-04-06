@@ -1,4 +1,5 @@
 class Api::UsersController < ApplicationController
+  before_action :authenticate_with_token!, only: [:update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
   before_filter :set_user, only: [:show, :update, :destroy ]
 
@@ -22,15 +23,16 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    if @user.update(approved_params)
-      render json: @user, status: 201
+    user = current_user
+    if user.update(approved_params)
+      render json: user, status: 201
     else
-      render json: { errors: @user.errors }, status: :unprocessable_entity
+      render json: { errors: user.errors }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @user.destroy
+    current_user.destroy
     head 204
   end
 
