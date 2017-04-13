@@ -13,3 +13,6 @@
 /tmp
 /config/database.yml
 /config/application.rb
+
+# Ignore application configuration
+/config/application.yml
