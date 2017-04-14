@@ -6,13 +6,17 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-require 'ffaker'
+# require 'ffaker'
 
-5.times { User.create(first_name: FFaker::Name.first_name,
-  last_name: FFaker::Name.last_name, email: FFaker::Internet.email,
+(1..5).each do |num|
+  User.create(first_name: "first #{num} name",
+  last_name: "last #{num} name", email: "example#{num}.com",
    password: '12345678', password_confirmation: '12345678') }
 
 users = User.all
 users.each do |user|
-  3.times { Post.create(title: FFaker::Lorem.word, body: FFaker::HipsterIpsum.paragraph, user: user) }
+  (1..3).each do |num|
+    Post.create(title: "Title #{num} for #{user.first_name}.",
+    body: "Hello, my name is: #{user.first_name} #{user.last_name}", user: user)
+  end
 end
