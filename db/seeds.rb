@@ -11,7 +11,8 @@
 (1..5).each do |num|
   User.create(first_name: "first #{num} name",
   last_name: "last #{num} name", email: "example#{num}.com",
-   password: '12345678', password_confirmation: '12345678') }
+   password: '12345678', password_confirmation: '12345678')
+ end
 
 users = User.all
 users.each do |user|
