@@ -14,7 +14,9 @@ on_worker_boot do
   ActiveRecord::Base.establish_connection
 end
 
-shared_dir = '/home/deploy/crowdly/shared'
+app_dir = File.expand_path("../..", __FILE__)
+shared_dir = "#{app_dir}/shared"
+
 bind "unix://#{shared_dir}/tmp/sockets/puma.sock"
 
 # Logging
