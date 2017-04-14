@@ -5,3 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+require 'ffaker'
+
+5.times { User.create(first_name: FFaker::Name.first_name,
+  last_name: FFaker::Name.last_name, email: FFaker::Internet.email,
+   password: '12345678', password_confirmation: '12345678') }
+
+users = User.all
+users.each do |user|
+  3.times { Post.create(title: FFaker::Lorem.word, body: FFaker::HipsterIpsum.paragraph, user: user) }
+end
