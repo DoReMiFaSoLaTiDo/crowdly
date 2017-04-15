@@ -27,7 +27,7 @@ set :format, :pretty
 set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml config/application.yml config/puma.rb}
+set :linked_files, %w{config/database.yml config/application.yml config/puma.rb config/secrets.yml}
 # append :linked_files, "config/database.yml", "config/secrets.yml"
 
 # Default value for linked_dirs is []
