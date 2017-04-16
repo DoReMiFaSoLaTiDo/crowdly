@@ -17,7 +17,7 @@ describe Api::UsersController do
 
     it "returns user details" do
       result = parsed_response
-      expect(result[:email]).to eql @user.email
+      expect(result[:username]).to eql @user.email
     end
   end
 
@@ -34,7 +34,7 @@ describe Api::UsersController do
 
       it "returns details of record created" do
         result = parsed_response
-        expect(result[:email]).to eql @user_attributes[:email]
+        expect(result[:username]).to eql @user_attributes[:email]
       end
     end
 
@@ -69,7 +69,7 @@ describe Api::UsersController do
 
       it "should return details of updated record" do
         result = parsed_response
-        expect(result[:first_name]).to eql "Solomon175"
+        expect(result[:name]).to include "Solomon175"
       end
 
       it "should return success code 201" do

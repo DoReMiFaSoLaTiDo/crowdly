@@ -3,4 +3,9 @@ class Post < ActiveRecord::Base
 
   validates :title, presence: true
   validates :body, presence: true
+
+  def content
+    self.body
+  end
+  
 end

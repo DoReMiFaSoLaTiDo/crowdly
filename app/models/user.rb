@@ -10,6 +10,14 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :auth_token, uniqueness: true
 
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+
+  def username
+    "#{self.email}"
+  end
+
   before_create :generate_authentication_token!
 
   def generate_authentication_token!
@@ -17,4 +25,5 @@ class User < ActiveRecord::Base
       self.auth_token = Devise.friendly_token
     end while self.class.exists?(auth_token: auth_token)
   end
+
 end
